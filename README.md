@@ -2,6 +2,8 @@
 
 **GHSA-2p8p-46r7-h95p** · CVSS 3.1 **7.1 (High)** · CVE requested, not yet assigned
 
+![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=c8m3o8xj3osapx-hustoj2)
+
 ## Prerequisites
 
 Forum enabled: `$OJ_BBS="discuss3"`. 
