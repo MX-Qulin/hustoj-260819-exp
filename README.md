@@ -1,8 +1,33 @@
-# Missing authorization in `threadadmin.php` (zhblue/hustoj)
-
-**GHSA-2p8p-46r7-h95p** · CVSS 3.1 **7.1 (High)** · CVE requested, not yet assigned
-
+# CVE-2026-106991 Report
 ![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=c8m3o8xj3osapx-hustoj2)
+
+## Description
+[HUSTOJ](https://github.com/zhblue/hustoj) is an open source online judge based on PHP/C++/MySQL/Linux for ACM/ICPC and NOIP training. Between version 24.09.10 and 26.08.19, due to missing authorization in `threadadmin.php`, any registered user can delete, pin, lock any thread via the request (`/threadadmin.php?target=thread&tid=<tid>&action=delete|lock|resume|sticky&level=<0-3>`).
+
+## Mertics
+| Standard | Score | Description |
+| :--- | :--- | :--- |
+| **CVSS v3.1** | `7.1 (High)` | `CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:N` |
+| **SSVC** | ADP:`CISA-ADP` | `Exploitation: None;Automatable: Yes;Technical Impact: low` |
+
+## References to Advisories, Solutions, and Tools
+
+Report: [CVE-2026-106991 Report](https://github.com/MX-Qulin/CVE-2026-106991)
+
+Patch: [HUSTOJ PR #1192](https://github.com/zhblue/hustoj/pull/1192)
+
+Affected File: [threadadmin.php](https://github.com/zhblue/hustoj/blob/master/trunk/web/threadadmin.php)
+
+Triage [GHSA-2p8p-46r7-h95p](https://github.com/zhblue/hustoj/security/advisories/GHSA-2p8p-46r7-h95p)
+
+## Weakness Enumeration
+CWE-862 [CWE-862 Missing Authorization](https://cwe.mitre.org/data/definitions/862.html)
+
+## Affected Products
+Source: GitHub, Inc.
+|Vendor|Product|Versions|
+|---|---|---|
+|zhblue|hustoj|24.09.10 <= Affected <= 26.08.19|
 
 ## Prerequisites
 
@@ -47,18 +72,12 @@ One request, logged in as an ordinary user: `GET /threadadmin.php?target=thread&
 
 ![bob locking an administrator's thread, 302 Found](./g-lock-admin-thread.png)
 
-
-
 Automated, zero dependencies: `python3 poc.py --url http://127.0.0.1:8080/ --auto-register` runs sticky, lock, delete, and denial-path checks; vulnerable builds report `VULNERABLE` on all four, patched builds report `patched`.
 
 
 
 ## Reported triage:
-
 ![GitHub Security Advisory GHSA-2p8p-46r7-h95p](./g-advisory.png)
-
 Repo owner didn’t repond to this advirsory, the fix PR has been merged.
-
-References: [GHSA-2p8p-46r7-h95p](https://github.com/zhblue/hustoj/security/advisories/GHSA-2p8p-46r7-h95p), [PR #1192](https://github.com/zhblue/hustoj/pull/1192), [threadadmin.php](https://github.com/zhblue/hustoj/blob/master/trunk/web/threadadmin.php). 
 
 Reported by [MX-Qulin](https://github.com/MX-Qulin) on 2026-09-12.
